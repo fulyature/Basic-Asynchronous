@@ -20,3 +20,26 @@ setTimeout(() => {
     }, 1000);
   }, 1000);
 }, 1000);
+
+//! Bir promise bir degerler tamamlanabilir yada bir sebeple (hata) iptal edilebilir.
+//! Bu durumlar then() ve catch() metotlari ile yakalanabilir.
+//? then() ve catch() metotlari promise dondururler.
+//? Zincirleme olarak kullanilabilirler.
+
+console.log("Promise");
+
+const networkReq = new Promise((resolve, reject) => {
+  const data = { a: 1, b: 2 };
+  const success = Math.floor(Math.random() * 5); //? (0,1,2,3,4)
+  if (success) {
+    console.log("Data fetched");
+    resolve(data);
+  } else {
+    reject("Ohh no there is network error");
+  }
+});
+
+networkReq
+  .then((response) => console.log(response))
+  .then(() => console.log("2. then"))
+  .catch((err) => document.write(err));
